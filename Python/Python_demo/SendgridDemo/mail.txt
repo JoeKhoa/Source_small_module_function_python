@@ -1,0 +1,32 @@
+curl --request POST \
+--url https://api.sendgrid.com/v3/mail/send \
+--header 'authorization: Bearer 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' \
+--header 'content-type: application/json' \
+--data '{
+            "personalizations":[{
+                "to":[{"email":"bluenight0105@gmail.com","name":"John Doe"}],
+                "subject":"Hello, World!"
+                            }],
+            "content": [
+                          {"type": "text/plain", "value": "Heya!"}
+                        ],
+            "from":{
+                    "email":"bluenight0104@gmail.com","name":"Sam Smith"
+                    },
+            "reply_to":{
+                        "email":"bluenight0105@gmail.com","name":"Sam Smith"
+                      }
+        }'
+
+
+curl --request POST \
+--url https://api.sendgrid.com/v3/mail/send \
+--header 'authorization: Bearer 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' \
+--header 'content-type: application/json' \
+--data '{"personalizations":[{"to":[{"email":"bluenight0105@gmail.com","name":"John Doe"}],"subject":"Hello, World!"}],"content": [{"type": "text/plain", "value": "Heya!"}],"from":{"email":"bluenight0104@gmail.com","name":"Sam Smith"},"reply_to":{"email":"bluenight0105@gmail.com","name":"Sam Smith"}}'
+
+
+
+curl --request POST --url https://api.sendgrid.com/v3/mail/send --header 'authorization: Bearer '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' ' --header 'content-type: application/json' --data '{"personalizations":[{"to":[{"email":"bluenight0105@gmail.com","name":"John Doe"}],"subject":"Hello, World!"}],"content":[{"type":"textplain","value":"Heya!"}],"from":{"email":"bluenight0104@gmail.com","name":"SamSmith"},"reply_to":{"email":"bluenight0105@gmail.com","name":"SamSmith"}}'
+
+set 

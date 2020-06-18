@@ -1,0 +1,34 @@
+version: '3.5'
+
+services:
+  app:
+    build: .
+    command: gunicorn todaylearning.wsgi --bind 0.0.0.0:8000 --reload --log-level DEBUG
+    volumes:
+      - .:/app
+    working_dir: /app
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+  db_ceb_local:
+    image: postgres:10.1-alpine
+    volumes:
+      # - ./database/pg:/var/lib/postgresql/data
+      - ./database/pg:/postgresql
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: ceb
+
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+  redis:
+    image: redis
+    expose:
+      - 6379
+    volumes:
+      - ./database/redis-data:/data

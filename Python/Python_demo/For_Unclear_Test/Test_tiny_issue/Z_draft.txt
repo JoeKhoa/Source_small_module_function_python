@@ -1,0 +1,157 @@
+ERROR :
+tutor 443
+  class Course(models.Model):
+  status = models.CharField(max_length=1, choices=STATUS_DATA, default='')
+Promotion 97, 98
+  begin_event_date = models.DateTimeField(blank=True, default='')
+
+ Tải Miễn Phí Tài Liệu Khung Chuẩn Mực Hành Nghề Kiểm Toán Nội Bộ Quốc Tế IPPF
+
+
+DataBase
+https://tailieu.vn/doc/tai-chinh-doanh-nghiep-va-nhung-dieu-can-biet-2238324.html
+http://www.vinabac.com/node/586
+https://smarttrain.edu.vn/smart-train-dong-hanh-cung-sift-analytics-trong-chuoi-su-kien-business-analytics-connection-2019/#
+
+https://topica.edu.vn/tin-tuc/cafebiz-chia-se-tai-buoi-hoi-nghi-ve-giao-duc-hang-dau-the-gioi-dai-dien-den-tu-viet-nam-noi-gi/
+
+
+BAC
+https://www.bacs.vn/vi/tin-tuc/tin-tuc/
+
+https://www.bacs.vn/vi/tin-tuc/su-kien-bac/
+
+https://www.bacs.vn/vi/blog/
+
+********************************** recipe-api-advanced NOTE **********************************
+postgres:10-alpine  (NOT postgres:10.1)
+
+********************************** DIR **********************************
+
+cd C:/Users/Lilti/Documents/LEARNING/PROGRAMMING/z.2.Source_code/Python/Python_ATOM/Django_REST/recipe-app-api-advanced
+
+cd C:/Users/Lilti/Documents/WORK/BACS/ceb/CEB_new_may_12_GIT/ceb/
+docker container start `(docker container ps -a -q)`
+cd C:/Users/Lilti/Documents/WORK/BACS/ceb/ceb
+ORIGIN
+cd C:/Users/Lilti/Documents/WORK/BACS/git_ceb_origin_my_GIT/ceb
+
+********************************** CEB PROJECT **********************************
+cat ceb_dump_06-09-2019_22_09_48 | docker exec -i ceb_db_ceb_local_1 psql -U postgres
+
+
+        *** RUN DJANGO SHELL
+        *(if necessary)
+        FOR TEST, DEBUG
+            docker network create reverse-proxy
+            docker-compose run --rm app sh -c "python manage.py test"
+        FOR RUN APP, MIGRATE
+            docker exec -it 0094385ac7d0 sh -c  "python manage.py test"
+            docker exec -it 0094385ac7d0  sh -c "python manage.py migrate"
+            docker exec -it 0094385ac7d0  sh -c "python manage.py migrate --fake"
+            docker exec -it 0094385ac7d0  sh -c "python manage.py makemigrations"
+            docker exec -it 0094385ac7d0  sh -c "python manage.py createsuperuser"
+
+dsdadad
+            user
+            user@gmail.com
+            12345
+********************************** DOCKER CMD **********************************
+DATABASE_URL=
+postgres://postgres:example@ceb_db_ceb_local_1:5432/tcp
+postgres://{user}:{password}@{hostname}:{port}/{database-name}
+
+docker exec -it 0094385ac7d0  sh -c "python manage.py migrate news zero"
+docker exec -it 0094385ac7d0  sh -c "python manage.py startapp blog"
+docker exec -it 0094385ac7d0  sh -c "python manage.py test"
+docker exec -it 0094385ac7d0  sh -c "python manage.py makemigrations"
+docker exec -it 0094385ac7d0  sh -c "python manage.py migrate"
+docker exec -it 0094385ac7d0  sh -c "python manage.py runserver 0.0.0.0:8000"
+
+
+
+docker-compose run --rm app sh -c "python manage.py runserver 0.0.0.0:8000"
+docker-compose run --rm app sh -c "python manage.py makemigrations"
+docker-compose run --rm app sh -c "python manage.py startapp news"
+
+docker-compose run --rm app sh -c "python manage.py test"
+
+### DB
+  cat <local-sql-db-file.sql> | docker exec -i <docker_postgres_container_name> psql -U postgres
+
+### run(container + start-server)
+docker-compose up
+docker-compose build
+
+### create container
+docker-compose run app
+
+# ALL
+docker container stop `(docker container ps -a -q)`
+docker container start `(docker container ps -a -q)`
+docker container restart `(docker container ps -a -q)`
+docker container rm `(docker container ps -a -q)`
+
+docker container start
+docker container stop
+docker container ps -a
+docker container ps -a -q
+docker container rm
+docker service ls
+docker stack ls
+
+
+
+*** show 3 first container
+docker container ps -a -n=3
+docker container start `(docker container ps -a -n=3 -q)`
+docker container stop `(docker container ps -a -n=3 -q)`
+docker container rm `(docker container ps -a -n=2 -q)`
+docker container rm `(docker container ps -a -q)`
+
+* Filter
+"""To list only the containers SHA1:
+docker image rmi `(docker image ls -a -q)`
+
+
+docker ps -a -f status=running
+"""To list all running and stopped containers, showing only their container id
+docker rm `docker ps -aq -f status=exited
+
+"""List of all containers for other commands
+(which accept multiple container ids as parameters).
+docker ps -aq --no-trunc
+
+docker ps -aq
+"""To remove all containers that are NOT running
+
+!!!!
+ docker system prune
+docker system info
+
+docker image prune
+
+?????
+
+docker images -f “dangling=true” -q
+
+
+
+Long answer: You can see the image id and parent id for all image created after the image in question with the following:
+
+docker inspect --format='{{.Id}} {{.Parent}}' \
+    $(docker images --filter since=f50f9524513f --quiet)
+
+
+
+
+ID=$(docker inspect --format="{{.Id}}" "$1")
+IMAGES=$(docker inspect --format="{{if eq \"$ID\" .Config.Image}}{{.Id}}{{end}}" $(docker images --filter since="$ID" -q))
+echo $(printf "%s\n" "${IMAGES[@]}" | sort -u)
+It'll print the child image id's, with the sha256: prefix.
+I also had the following, which appends the names:
+
+IMAGES=$(docker inspect --format="{{if eq \"$ID\" .Config.Image}}{{.Id}}{{.RepoTags}}{{end}}" $(docker images --filter since="$ID" -q))
+ID= Gets the full id of the image
+IMAGES= Gets all child images that have this image listed as an Image
+echo... Removes duplicates and echos the results
